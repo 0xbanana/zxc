@@ -1,12 +1,18 @@
 sudo: required
 dist: trusty
+services:
+- docker
 language: node_js
 node_js:
 - "10"
+before_install:
+- docker pull luongnguyen/oyente
+#- docker run -ti luongnguyen/oyente
 install:
 - npm install -g truffle ganache-cli
 - npm install
 script:
+- docker run -ti luongnguyen/oyente
 - truffle compile
 - truffle migrate
 - truffle test
