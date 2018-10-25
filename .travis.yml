@@ -14,7 +14,7 @@ script:
 - truffle compile
 - truffle migrate
 - truffle test
-- docker run --rm -v `PWD`:/contracts trailofbits/manticore -c "manticore contracts/*"
+- docker run --rm -v $(pwd):/contracts trailofbits/manticore -c "manticore contracts/*"
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
 - sleep 5
