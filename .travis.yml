@@ -16,8 +16,8 @@ script:
 - truffle compile
 - truffle migrate
 - docker run -v $(pwd):/tmp mythril/myth -x /tmp/contracts/Migrations.sol
-- docker run -v $(pwd):/tmp trailofbits/echidna /tmp/contracts/Migrations.sol
-- docker run -v $(pwd):/tmp luongnguyen/oyente -s /tmp/contracts/Migrations.sol
+- docker run -v $(pwd):/tmp trailofbits/echidna echidna-test /tmp/contracts/Migrations.sol
+- docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/contracts/Migrations.sol -ce
 #- docker run --rm -v $(pwd):/tmp trailofbits/manticore manticore /tmp/contracts/Migrations.sol
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
