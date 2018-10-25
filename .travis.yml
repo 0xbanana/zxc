@@ -7,15 +7,14 @@ node_js:
 - "10"
 before_install:
 - docker pull luongnguyen/oyente
-#- docker run -ti luongnguyen/oyente
+- docker pull trailofbits/manticore
 install:
 - npm install -g truffle ganache-cli
-- npm install
 script:
-- docker run -ti luongnguyen/oyente
 - truffle compile
 - truffle migrate
 - truffle test
+- docker run -rm trailofbits/manticore contracts/*
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
 - sleep 5
