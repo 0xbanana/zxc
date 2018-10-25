@@ -6,15 +6,16 @@ language: node_js
 node_js:
 - "10"
 before_install:
-- docker pull luongnguyen/oyente
-- docker pull trailofbits/manticore
+#- docker pull luongnguyen/oyente
+#- docker pull trailofbits/manticore
+- docker pull myhtril/myth
 install:
 - npm install -g truffle ganache-cli
 script:
 - truffle compile
 - truffle migrate
-- truffle test
-- docker run --rm -v ~/contracts:/contracts trailofbits/manticore manticore /contracts/Migrations.sol
+- docker run -v $(pwd):/tmp mythril/myth --help
+#- docker run --rm -v ~/contracts:/contracts trailofbits/manticore manticore /contracts/Migrations.sol
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
 - sleep 5
