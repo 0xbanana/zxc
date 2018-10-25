@@ -7,17 +7,17 @@ node_js:
 - "10"
 before_install:
 - docker pull luongnguyen/oyente
-#- docker pull trailofbits/manticore
 - docker pull trailofbits/echidna
 - docker pull mythril/myth
+#- docker pull trailofbits/manticore
 install:
 - npm install -g truffle ganache-cli
 script:
 - truffle compile
 - truffle migrate
-- docker run -v $(pwd):/tmp mythril/myth -x /tmp/contracts/Reentrancy.sol
-- docker run -v $(pwd):/tmp trailofbits/echidna echidna-test /tmp/contracts/Reentrancy.sol
-- docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/contracts/Reentrancy.sol -ce
+- docker run -v $(pwd):/tmp mythril/myth -x /tmp/contracts/CryptoKitties_Core.sol
+- docker run -v $(pwd):/tmp trailofbits/echidna echidna-test /tmp/contracts/CryptoKitties_Core.sol
+- docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/contracts/CryptoKitties_Core.sol -ce
 #- docker run --rm -v $(pwd):/tmp trailofbits/manticore manticore /tmp/contracts/Migrations.sol
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
