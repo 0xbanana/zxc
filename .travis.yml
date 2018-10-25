@@ -14,7 +14,7 @@ install:
 script:
 - truffle compile
 - truffle migrate
-- docker run -v $(pwd):/tmp mythril/myth --help
+- docker run -v $(pwd):/tmp mythril/myth -x /tmp/contracts/Migrations.sol
 #- docker run --rm -v ~/contracts:/contracts trailofbits/manticore manticore /contracts/Migrations.sol
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
