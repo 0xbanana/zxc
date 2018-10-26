@@ -7,8 +7,8 @@ node_js:
 - "10"
 before_install:
 - docker pull luongnguyen/oyente
-- docker pull trailofbits/echidna
-- docker pull mythril/myth
+#- docker pull trailofbits/echidna
+#- docker pull mythril/myth
 #- docker pull trailofbits/manticore
 install:
 - npm install -g truffle ganache-cli
