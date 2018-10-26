@@ -6,4 +6,4 @@ ls contracts/*.sol |
 		echo "[FILE]: $a"; 
 		docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/$a -ce;
 		docker run -v $(pwd):/tmp trailofbits/echidna echidna-test /tmp/$a;
-	); done;
+	); done ;
