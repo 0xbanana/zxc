@@ -1,38 +1,43 @@
-sudo: required
-dist: trusty
+#
+# Smart Contract Analyzer v0.1
+# By: 0xBanana
+#
+#
+sudo: required # Sudo enabled
+dist: trusty # Ubuntu 14.04 
 services:
-- docker
-language: node_js
+- docker # Enables Docker
+language: node_js # We're using node js v10 for ganache
 node_js:
 - "10"
-before_cache:
-  # Save tagged docker images
-  - mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}' | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
 before_install:
-- if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
-#- docker pull luongnguyen/oyente
-#- docker pull trailofbits/echidna
-#- docker pull mythril/myth
-#- docker pull trailofbits/manticore
+- docker pull luongnguyen/oyente
+- docker pull trailofbits/echidna
+- docker pull mythril/myth
+- docker pull trailofbits/manticore
 install:
-- npm install -g truffle ganache-cli
-script:
-- truffle compile
-- truffle migrate
-#- docker run -v $(pwd):/tmp mythril/myth -x /tmp/contracts/CryptoKitties_Core.sol
-#- docker run --rm -v $(pwd):/tmp trailofbits/manticore manticore /tmp/contracts/Migrations.sol
-- bash ./looper.sh
+- npm install -g truffle ganache-cli # Personal Blockchain server
 before_script:
-- ganache-cli --port 7545 2> /dev/null 1> /dev/null &
-- sleep 5
-cache:
-    bundler: true
-    directories:
-        - $HOME/docker
+- ganache-cli --port 7545 2> /dev/null 1> /dev/null &  # Run the ganache server 
+- sleep 5 # Give time for things to spin up
+script:
+- bash ./static.sh  # Run our static toolset script
+- bash ./dynamic.sh # Run our static toolset script
+
 notifications:
     irc:
       - "ircs://chat.freenode.net:7070/#0xbanana"
-      #on_success: always
-      #on_failure: always
-      #template:
-      #  - "%{repository_slug} (%{commit}) : %{message} Build details: %{build_url}"
+
+
+
+
+################################################
+#before_install:
+#- if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
+#before_cache:
+#  # Save tagged docker images
+#  - mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}' | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
+#cache:
+#    bundler: true
+#    directories:
+#        - $HOME/docker
