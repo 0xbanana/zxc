@@ -32,8 +32,8 @@ cache:
 notifications:
     irc:
       - "ircs://chat.freenode.net:7070/#0xbanana"
-      on_success: always
-      on_failure: always
-      template:
-        - "%{repository_slug} (%{commit}) : %{message} %{foo} "
-        - "Build details: %{build_url}"
+      #on_success: always
+      #on_failure: always
+      #template:
+      #  - "%{repository_slug} (%{commit}) : %{message} %{foo} "
+      #  - "Build details: %{build_url}"
