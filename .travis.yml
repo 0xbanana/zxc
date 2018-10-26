@@ -15,10 +15,11 @@ install:
 script:
 - truffle compile
 - truffle migrate
-- docker run -v $(pwd):/tmp mythril/myth -x /tmp/contracts/CryptoKitties_Core.sol
-- docker run -v $(pwd):/tmp trailofbits/echidna echidna-test /tmp/contracts/CryptoKitties_Core.sol
-- docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/contracts/CryptoKitties_Core.sol -ce
+#- docker run -v $(pwd):/tmp mythril/myth -x /tmp/contracts/CryptoKitties_Core.sol
+#- docker run -v $(pwd):/tmp trailofbits/echidna echidna-test /tmp/contracts/CryptoKitties_Core.sol
+#- docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/contracts/CryptoKitties_Core.sol -ce
 #- docker run --rm -v $(pwd):/tmp trailofbits/manticore manticore /tmp/contracts/Migrations.sol
+- bash ./looper.sh
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
 - sleep 5
