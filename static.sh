@@ -12,7 +12,7 @@ ls contracts/*.sol |
 		echo "[Found File]: $a";
 		echo "";
 		echo "Running task oyente"; 
-		docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/$a -ce;
+		docker run -v $(pwd):/tmp luongnguyen/oyente oyente/oyente.py -s /tmp/$a -ce > $a_boop;
 
 		echo "--------------------------------------------------------------------"
 		echo "\n\nRunning task echidna-test\n"
