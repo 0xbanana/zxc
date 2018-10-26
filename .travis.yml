@@ -21,3 +21,11 @@ script:
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
 - sleep 5
+notifications:
+    irc:
+      - "ircs://chat.freenode.net:7070/#0xbanana"
+      on_success: always
+      on_failure: always
+      template:
+        - "%{repository_slug} (%{commit}) : %{message} %{foo} "
+        - "Build details: %{build_url}"
