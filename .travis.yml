@@ -27,6 +27,10 @@ script:
 before_script:
 - ganache-cli --port 7545 2> /dev/null 1> /dev/null &
 - sleep 5
+cache:
+    bundler: true
+    directories:
+        - $HOME/docker
 notifications:
     irc:
       - "ircs://chat.freenode.net:7070/#0xbanana"
